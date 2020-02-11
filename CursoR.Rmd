@@ -1,0 +1,663 @@
+---
+title: "Curso RStudio"
+author: "Maria Oliveira"
+date: Janeiro, 2020
+output:
+  slidy_presentation: default
+  output: rmarkdown::github_document
+  html_document: default
+  pdf_document: default
+  ioslides_presentation: default
+  beamer_presentation: default
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(tidyr)
+db <- read.csv2("base19.csv", h=T, sep=";", dec=",",stringsAsFactors = FALSE)
+str(db)
+```
+
+<font size="18">AGENDA</font></mark>
+
+- R e RStudio
+- Correlação
+- Covariância
+- Regressão
+- Parte prática no R
+
+##
+<mark>O QUE É O <font size="18">R</font>?</mark>
+
+
+- Ambiente estatístico para **análise de dados** e produção de gráficos
+- Uma completa linguagem de programação:
+- Interpretada (contrário de compilada)
+```
+- Orientada a objetos:
+  Tudo no R é um objeto…
+```
+
+- Livre distribuição (código-aberto)
+- Mais de 6000 pacotes adicionais
+- Criado por Ross Ihaka e Robert Gentleman - R Core Team
+- Implementação da linguagem S
+- página oficial do projeto: http://www.r-project.org.
+
+```
+- R-Studio: um ambiente para facilitar o uso do R
+```
+
+##
+
+*Correlação*
+
+- Medir o grau de relacionamento entre duas ou mais variáveis
+- Variável é a característica de interesse que é medida 
+- Distribuição Normal x distribuição não conhecida
+- Coeficiente de correlação de Pearson, Spearman, Contingência
+- Diagrama de dispersão (comportamento)
+
+##
+
+*Covariância*
+
+- Como as duas variáveis variam de forma conjunta
+- Quadrantes - Relação linear ou não
+- Graus de relação (unidades de medida)
+- Dividindo a covariãncia pelo Desvio-Padrão = r
+
+##
+
+*Correlação*
+
+- Isento de unidades (varia de -1 a 1)
+- Relação é difusa ou não linear r será igual a 0
+- Pearson (quantitativas), Spearman (ordinais)
+- coeficiente de Determinação = $r^2$: a proporção da variação de Y que é explicada pela variável X 
+
+##
+
+*Regressão*
+
+- Análise de regressão: investigação e modelagem da relação entre variáveis
+- Simples: reta que estabelece a relação entre uma variável resposta y e uma única variável
+explicativa x
+- $Y=\beta_0+\beta_1X+\epsilon$
+- fazer predições
+
+##
+
+*R - Dia 1*
+
+##
+* Configuração inicial
+* Configurando o diretório de trabalho
+* O diretório de trabalho é uma pasta onde o R será direcionado. Todos os arquivos que serão importados (base   de dados, …) ou exportados (base de dados, gráficos, …) por ele ficarão nesta pasta.
+* Existem duas maneiras de configurar o diretório de trabalho (suponha que vamos usar a pasta ~/comp&ben):
+
+1) Utilizando a função setwd( ) dentro do R:
+
+setwd("~/comp&ben")
+
+<span style="color:red">2) Pelo menu do RStudio em Session > Set Working Directory > Choose Directory... </span>
+
+Confira o diretório que está trabalhando com a função
+
+getwd()
+
+##
+
+```
+O R como uma calculadora
+```
+
+
+O símbolo > indica que o R está pronto para receber um comando: 2 + 2
+
+* O editor de scripts
+* <span style="color:red"> Clique em File > New file > R script. Salve com a extensão .R.</span>
+* Para enviar comandos diretamente para o console, selecione-os e aperte Ctrl + Enter.
+* Para adicionar comentários ao script, utiliza-se o símbolo # antes do texto e/ou comandos. O que estiver      depois do símbolo não será interpretado pelo R. Portanto:
+
+* 2 + 2     esta linha será executada  
+
+* #2 + 2     esta linha não será executada
+
+##
+
+
+```{r, include=FALSE}
+library(kableExtra)
+```
+
+* Operadores aritméticos
+
+| operador    | significado   |
+|-------------|---------------|
+| +           | adição        |
+| -           | subtração     |
+| *           | multiplicação |
+| /           | divisão       |
+| ^           | potência      |
+| exp()       | exponencial   |
+| sqrt()      | raiz quadrada |
+| factorial() | fatorial      |
+
+
+```{r, results=FALSE}
+5 * (2 - (10 + 7))
+```
+
+
+1. Calcule a seguinte equação: $32+16^2−25^3$?
+2. Qual o resultado da expressão $\frac{e^{−2}2^4−1}{4!}$?
+
+##
+
+* Salvando um resultado, declarando uma variável
+
+```{r, results=FALSE}
+x <- 32 + 16^2 - 25^3
+x
+```
+
+* Para saber quais objetos foram criados: ls()
+* Para remover um objeto: rm()
+
+```{r}
+set.seed(2)
+sample(10, 4, replace = FALSE)
+
+```
+
+* Para pesquisa: ?runif ou help(runif)
+
+* Criando função:
+
+```{r, results=FALSE}
+a <- function(x){
+  x+3*2
+}
+a(2)
+```
+
+```{r}
+ola.mundo <- function(){
+    writeLines("Olá mundo")
+}
+ola.mundo()
+```
+
+
+##
+
+
+<font size="18">OBJETOS</font>
+
+* A variável x recebe o valor 2 (tornando-se um objeto dentro do R):
+
+<span style="color:red">O símbolo <- é chamado de operador de atribuição. Ele serve para atribuir valores a objetos, e é formado     pelos símbolos < e -, obrigatoriamente sem espaços.</span>
+
+```{r, results=FALSE}
+X <- 2
+x <- 2; y <- 4
+x+x
+teste <- "teste"
+teste1 <- teste
+```
+
+
+```{r}
+# O R é case-sensitive
+```
+
+3. Divida x por 345 e armazene em y.
+
+##
+
+<font size="18">VETOR</font>
+
+Usando a função c() para criar vetores:
+
+```{r, results=FALSE}
+vetor <- c(1,2,3,4)
+class(vetor)
+vetor1 <- as.factor(vetor)
+levels(vetor1)
+```
+
+O R possui 5 classes básicas de objetos, também chamados de objetos “atômicos”:
+
+
+* character  
+* numeric  
+* integer  
+* complex  
+* logical
+
+```css
+Um vetor só pode conter elementos de uma mesma classe
+```
+
+##
+
+
+Os operadores lógicos utilizados no R são:
+
+
+
+| Símbolo     | significado   |
+|-------------|---------------|
+| <           | menor         |
+| <=          | menor igual   |
+| >           | maior         |
+| >=          | maior igual   |
+| ==          | igual         |
+| !=          | diferente     |
+| &           | e             |
+| &#124;      | ou            |
+
+
+##
+
+* Criando sequências
+
+```{r, results=FALSE}
+seq(1,10)
+1:10
+seq(from = 1, to = 10, by = 2)
+a <- seq(from = 1, to = 10, length.out = 15)
+print(a, digits=3)
+rep(1, 10)
+rep(c(1, 2, 3), 5)
+rep(c(1, 2, 3), each = 5)
+num <- c(10, 5, 2, 4, 8, 9)
+num
+num * 2
+num * num
+num + c(2, 4, 1)
+```
+
+4. Crie um objeto com os valores 54, 0, 17, 94, 12.5, 2, 0.9, 15.
+Some o objeto acima com os valores 5, 6.
+
+##
+
+* Valores perdidos e especiais
+
+```{r, results=FALSE}
+perd <- c(3, 5, NA, 2)
+perd
+class(perd)
+perd1 <- as.integer(perd)
+class(perd1)
+any(is.na(perd))
+```
+
+```{r, include=FALSE}
+pot <- function(x){
+  x=seq(0,20)
+ x=as.integer(2^x)
+ print(x, digits=10)
+}
+pot(20)
+
+int <- 1:20
+x <- 2^int
+x
+```
+
+* Calcule as 20 primeiras potências de 2
+
+##
+
+* Matrizes, listas e data frames
+
+```{r}
+matriz <- matrix(1:12, nrow = 3, ncol = 4)
+matriz
+rownames(matriz) <- c("A","B","C")
+cbind(matriz, rep(99, 3))
+dim(matriz) <- c(2, 6)
+```
+
+```{r}
+lista <- list(a = 1:10, b = c("T1", "T2", "T3", "T4"), TRUE, 2 + 2)
+length(lista)
+```
+
+##
+
+```{r, results=FALSE}
+da <- data.frame(ano = 2000:2004,
+                 prod = c(32, 54, 25, 48, 29))
+class(da)
+dim(da)
+str(da)
+row.names(da)
+colnames(da)
+```
+
+5. Crie um data frame com os nomes e idades de cada um do curso.
+
+```{r, include=FALSE}
+carang <- data.frame(caranguejos=c(21,33,55,13),
+                                   (praia=c("Joaquina", "Campeche", "Armação", "Praia Mole")))
+colnames(carang) <- c("caranguejos","praia")
+```
+
+##
+
+
+* Gostando até aqui?
+
+
+
+##
+
+*INDEXAÇÃO E SELEÇÃO CONDICIONAL*
+
+**Existem três tipos de operadores que podem ser usados para indexar (e selecionar) sub-conjuntos (subsets) de objetos no R**
+
+* O operador "[[]]" sempre retorna um objeto da mesma classe que o original. Pode ser usado para selecionar múltiplos elementos de um objeto
+* O operador "[[[]]]" é usado para extrair elementos de uma lista ou data frame. Pode ser usado para extrair um único elemento e a classe do objeto retornado não precisa necessariamente ser uma lista ou data frame.
+* O operador $ é usado para extrair elementos nomeados de uma lista ou data frame. É similar ao operador [[[] ]].
+
+##
+
+```{r, results=FALSE}
+vet <- c(1,2,4,33,NA,5, 7)
+vet[4]
+vet[c(1,2,6)]
+ind <- c(1,2,6)
+vet[ind]
+vet[-c(1,2,6)]
+vet[is.na(vet)]
+vet[!is.na(vet)]
+vet[is.na(vet)] <- 0
+is.na(vet) <- 3
+names(vet) <- letters[1:length(vet)]
+vet["d"]
+mat <- matrix(1:9, nrow = 3)
+mat[2, 3]
+mat[,1]
+mat[1, , drop = FALSE]
+```
+
+##
+
+*Indexação de Data-frames*
+
+```{r, results=FALSE}
+da <- data.frame(A = 4:1, B = c(2, NA, 5, 8))
+da
+da[1,]
+da$A
+da$B[3]
+da[!is.na(da$B), ]
+complete.cases(da)
+da[complete.cases(da), ]
+with(da,A)
+with(da,B[3])
+
+#Seleção condicional
+
+dados <- c(5, 15, 42, 28, 79, 4, 7, 14)
+dados[dados>15]
+dados[dados>15 & dados<=42]
+cara <- letters[1:length(dados)]
+dados[cara=="c"]
+dados[cara%in%c("a","c")]
+cara[dados==15]
+## Elemento de cara onde dados for igual a 4 ou 14
+cara[dados %in% c(4, 14)]
+which(dados>15)
+```
+
+##
+
+*Seleção condicional em data-frames*
+
+```{r, results=FALSE}
+dados <- data.frame(ano = c(2001:2005),
+                    captura = c(10:13,NA), 
+                    porto = c("SP", "RS", "SC", "SC", "RN"))
+
+dados[dados$ano==2004, ]
+dados[dados$porto=="SC", ]
+dados[dados$captura>13, "captura"]
+dados[dados$captura>12 & !is.na(dados$captura), ]
+subset(dados, porto=="SC")
+subset(dados, captura > 11, select = captura)
+```
+
+##
+
+*Entrada e saída de dados no R*
+
+- via teclado: função scan()
+```{r, results=FALSE}
+##y <- scan()
+x <- scan(what = "character")
+
+texto <- readLines(n=1)
+fn <- function() {
+    cat("Digite o nome do time de futebol de sua preferência (em letras minúsculas)\n")
+    time <- readLines(n = 1)
+    if (time == "coritiba")
+        cat("BOA ESCOLHA!!!\n")
+    else cat("Ihh, tá mal de escolha...\n")
+    return(invisible())
+}
+
+##fn()
+```
+
+##
+
+*A função read.table()*
+
+- O método mais comum de importação de dados para o R.
+- Para importar um arquivo .csv faça:
+
+```{r, results=FALSE}
+dados <- read.table("C:/Users/Maria/Documents/Maria/cnh/curso/idade.csv", header = TRUE, sep = ";", dec = ",")
+getwd()
+```
+
+Argumentos:
+
+- "base19.csv": nome do arquivo. (Considerando que o arquivo base19.csv está dentro do diretório Curso R).
+- header = TRUE: significa que a primeira linha do arquivo deve ser interpretada como os nomes das colunas
+- sep = ";": o separador de colunas (também pode ser ",", "$\t$" para tabulação e " " para espaços)
+- dec = ",": o separador de decimais (também pode ser ".")
+- As funções read.csv() e read.csv2() são chamadas de wrappers (envelopes) que tornam o usa da função read.table() um pouco mais direta, alterando alguns argumentos. Por exemplo, o comando acima poderia ser substituído por:
+
+##
+
+```{r, results=FALSE}
+dados1 <- read.csv2("C:/Users/Maria/Documents/Maria/cnh/curso/bancao19.csv")
+str(dados1)
+```
+
+
+- Para conferir a estrutura de dados: str()
+- início e final: head() e tail()
+- para selecionar uma coluna: $
+
+```{r, results=FALSE}
+dados$tempo
+dados$idade
+summary(dados)
+str(dados)
+class(dados$tempo)
+```
+
+- Na base de dados: base19, ache o funcionário Diogo Ayres 
+
+```{r, include=FALSE, results=FALSE}
+subset(dados1, Nome == "DIOGO AYRES MORAES")
+
+```
+
+##
+
+```{r, results=FALSE}
+url <- "http://www.leg.ufpr.br/~fernandomayer/data/milsa.csv"
+milsa <- read.csv(url)
+str(milsa)
+```
+- Variável Qualitativa Nominal
+
+```{r, results=FALSE}
+str(dados1)
+names(dados1)
+civil.tb <- table(dados1$Sexo)
+civil.tb/length(dados1$Sexo)
+barplot(civil.tb)
+pie(civil.tb)
+##frequência relativa
+prop.table(civil.tb)
+plot(dados1$Raça.Cor)
+names(civil.tb)[which.max(civil.tb)]
+median(as.numeric(dados1$Salario, na.rm=TRUE))
+mean(as.numeric(dados1$Salario, na.rm = TRUE))
+dados1$Salario <- as.numeric(dados1$Salario)
+var(dados1$Salario, na.rm = TRUE)
+sd(dados1$Salario, na.rm = TRUE)
+quantile(dados1$Salario, na.rm=TRUE)
+max(dados1$Salario, na.rm=TRUE)
+min(dados1$Salario, na.rm=TRUE)
+```
+##
+
+- Variável quantitativa contínua
+
+```{r, results=FALSE}
+dados1$Salario <- as.numeric(dados1$Salario)
+hist(dados1$Salario, freq = TRUE, labels = TRUE)
+boxplot(dados1$Salario)
+```
+
+## Análise Bivariada e Correlaçao
+
+```{r, results=FALSE, warning=FALSE}
+raca <- with(dados1, table(Sexo, Raça.Cor))
+addmargins(raca)
+barplot(raca, legend=TRUE)
+library(ggplot2)
+ggplot(dados1) +geom_point(aes(x= dados1$Sexo, dados1$Salario, colour = as.factor(Sexo)))
+boxplot(Salario~Sexo, data= dados1)
+levels(dados1$Sexo)
+dados1$Salario <- as.numeric(dados1$Salario)
+dados1$Sexo<-ifelse(dados1$Sexo=="M", 1,0)
+with(dados1, cor(Salario, Sexo))
+cor.test(dados1$Salario, dados1$Sexo)
+names(dados1)
+library(psych)
+pairs.panels(dados1[ , 9:13], 
+             method = "pearson",
+             hist.col = 2,
+             density = TRUE, 
+             ellipses = FALSE,
+             pch = 20,
+             lwd = 0.01
+
+)
+
+data <- data.frame(dados1$Sexo, dados1$Estado.Civil)
+data <- table(dados1$Sexo, dados1$Estado.Civil)
+print(chisq.test(data))
+
+```
+
+##
+
+Estruturas de repetição
+
+```{r, results=FALSE}
+for(i in c(2, 9, 4, 6)){
+    print(i^2)
+}
+
+x <- 100:200
+for(j in 1:10){
+    if(x[j] <= 105){
+        print("Menor ou igual a 105")
+    } else{
+        print("Maior do que 105")
+    }
+}
+
+x <- 1:1000000
+y1 <- numeric(length(x))
+for(i in 1:length(x)){
+    y1[i] <- x[i]^2
+}
+
+y2 <- x^2
+## Confere os resultados
+identical(y1, y2)
+```
+
+## Família Apply
+
+```{r, results=FALSE}
+names(dados1)
+dados1[,c(1, 2, 3, 4:20)]
+
+dados2 <- subset(dados1, select=c(1,2:10, 19, 11:20))
+dados2$Salario <- as.numeric(dados2$Salario)
+
+apply(dados2[, 10:11], 2, mean)
+with(dados1, (tapply(Sexo, Raça.Cor, table)))
+
+x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))
+x
+lapply(x, mean)
+sapply(x, mean)
+```
+
+## Predições
+
+```{r, results=FALSE}
+cars
+summary(cars)
+## Ajuste do modelo
+mod <- lm(dist ~ speed, data = cars)
+summary(mod)
+pred <- data.frame(speed = seq(4, 25, by = 0.5))
+ypred <- predict(mod, newdata = pred, interval = "confidence")
+pred <- cbind(pred, ypred)
+pred
+plot(dist ~ speed, data = cars,
+     xlab = "Velocidade ao acionar os freios",
+     ylab = "Distância para parada completa")
+with(pred,
+     matlines(x = speed, y = cbind(fit, lwr, upr),
+              lty = c(1, 2, 2), col = 1))
+```
+
+## Séries Temporais
+
+```{r, results=FALSE, warning=FALSE}
+library(tseries)
+leavers <- read.csv2("leavers.csv", h=T)
+leavers1 <- na.omit(leavers$Age)
+tempotimeseries <- ts(leavers1, start=c(2015,1), end=c(2019,10), frequency=30)
+plot.ts(tempotimeseries)
+timeseriescomponents <- decompose(tempotimeseries)
+plot(timeseriescomponents)
+
+
+library(forecast)
+forecast(tempotimeseries)
+plot(forecast(tempotimeseries))
+
+arima.model <- auto.arima(ts(tempotimeseries, frequency=30), D=1)
+summary(arima.model)
+forearima <- forecast::forecast(arima.model, h=5)
+forearima
+```
+

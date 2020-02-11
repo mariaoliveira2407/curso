@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Maria Oliveira" />
+  <title>Curso RStudio</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="site_libs/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="site_libs/slidy-2/scripts/slidy.js"></script>
+  <script src="site_libs/slidy_shiny-1/slidy_shiny.js"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Curso RStudio</h1>
+  <p class="author">
+Maria Oliveira
+  </p>
+  <p class="date">Janeiro, 2020</p>
+</div>
+<div class="slide section level2">
+
+<p><font size="18">AGENDA</font></mark></p>
+<ul>
+<li>R e RStudio</li>
+<li>Correlação</li>
+<li>Covariância</li>
+<li>Regressão</li>
+<li>Parte prática no R</li>
+</ul>
+</div>
+<div id="section" class="slide section level2">
+<h1></h1>
+<p><mark>O QUE É O <font size="18">R</font>?</mark></p>
+<ul>
+<li>Ambiente estatístico para <strong>análise de dados</strong> e produção de gráficos</li>
+<li>Uma completa linguagem de programação:</li>
+<li>Interpretada (contrário de compilada)</li>
+</ul>
+<pre><code>- Orientada a objetos:
+  Tudo no R é um objeto…</code></pre>
+<ul>
+<li>Livre distribuição (código-aberto)</li>
+<li>Mais de 6000 pacotes adicionais</li>
+<li>Criado por Ross Ihaka e Robert Gentleman - R Core Team</li>
+<li>Implementação da linguagem S</li>
+<li>página oficial do projeto: <a href="http://www.r-project.org" class="uri">http://www.r-project.org</a>.</li>
+</ul>
+<pre><code>- R-Studio: um ambiente para facilitar o uso do R</code></pre>
+</div>
+<div id="section-1" class="slide section level2">
+<h1></h1>
+<p><em>Correlação</em></p>
+<ul>
+<li>Medir o grau de relacionamento entre duas ou mais variáveis</li>
+<li>Variável é a característica de interesse que é medida</li>
+<li>Distribuição Normal x distribuição não conhecida</li>
+<li>Coeficiente de correlação de Pearson, Spearman, Contingência</li>
+<li>Diagrama de dispersão (comportamento)</li>
+</ul>
+</div>
+<div id="section-2" class="slide section level2">
+<h1></h1>
+<p><em>Covariância</em></p>
+<ul>
+<li>Como as duas variáveis variam de forma conjunta</li>
+<li>Quadrantes - Relação linear ou não</li>
+<li>Graus de relação (unidades de medida)</li>
+<li>Dividindo a covariãncia pelo Desvio-Padrão = r</li>
+</ul>
+</div>
+<div id="section-3" class="slide section level2">
+<h1></h1>
+<p><em>Correlação</em></p>
+<ul>
+<li>Isento de unidades (varia de -1 a 1)</li>
+<li>Relação é difusa ou não linear r será igual a 0</li>
+<li>Pearson (quantitativas), Spearman (ordinais)</li>
+<li>coeficiente de Determinação = <span class="math inline">\(r^2\)</span>: a proporção da variação de Y que é explicada pela variável X</li>
+</ul>
+</div>
+<div id="section-4" class="slide section level2">
+<h1></h1>
+<p><em>Regressão</em></p>
+<ul>
+<li>Análise de regressão: investigação e modelagem da relação entre variáveis</li>
+<li>Simples: reta que estabelece a relação entre uma variável resposta y e uma única variável explicativa x</li>
+<li><span class="math inline">\(Y=\beta_0+\beta_1X+\epsilon\)</span></li>
+<li>fazer predições</li>
+</ul>
+</div>
+<div id="section-5" class="slide section level2">
+<h1></h1>
+<p><em>R - Dia 1</em></p>
+</div>
+<div id="section-6" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Configuração inicial</li>
+<li>Configurando o diretório de trabalho</li>
+<li>O diretório de trabalho é uma pasta onde o R será direcionado. Todos os arquivos que serão importados (base de dados, …) ou exportados (base de dados, gráficos, …) por ele ficarão nesta pasta.</li>
+<li>Existem duas maneiras de configurar o diretório de trabalho (suponha que vamos usar a pasta ~/comp&amp;ben):</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Utilizando a função setwd( ) dentro do R:</li>
+</ol>
+<p>setwd(“~/comp&amp;ben”)</p>
+<p><span style="color:red">2) Pelo menu do RStudio em Session &gt; Set Working Directory &gt; Choose Directory… </span></p>
+<p>Confira o diretório que está trabalhando com a função</p>
+<p>getwd()</p>
+</div>
+<div id="section-7" class="slide section level2">
+<h1></h1>
+<pre><code>O R como uma calculadora</code></pre>
+<p>O símbolo &gt; indica que o R está pronto para receber um comando: 2 + 2</p>
+<ul>
+<li>O editor de scripts</li>
+<li><span style="color:red"> Clique em File &gt; New file &gt; R script. Salve com a extensão .R.</span></li>
+<li>Para enviar comandos diretamente para o console, selecione-os e aperte Ctrl + Enter.</li>
+<li><p>Para adicionar comentários ao script, utiliza-se o símbolo # antes do texto e/ou comandos. O que estiver depois do símbolo não será interpretado pelo R. Portanto:</p></li>
+<li><p>2 + 2 esta linha será executada</p></li>
+<li><p>#2 + 2 esta linha não será executada</p></li>
+</ul>
+</div>
+<div id="section-8" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Operadores aritméticos</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>operador</th>
+<th>significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>adição</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>subtração</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>multiplicação</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>divisão</td>
+</tr>
+<tr class="odd">
+<td>^</td>
+<td>potência</td>
+</tr>
+<tr class="even">
+<td>exp()</td>
+<td>exponencial</td>
+</tr>
+<tr class="odd">
+<td>sqrt()</td>
+<td>raiz quadrada</td>
+</tr>
+<tr class="even">
+<td>factorial()</td>
+<td>fatorial</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">7</span>))</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Calcule a seguinte equação: <span class="math inline">\(32+16^2−25^3\)</span>?</li>
+<li>Qual o resultado da expressão <span class="math inline">\(\frac{e^{−2}2^4−1}{4!}\)</span>?</li>
+</ol>
+</div>
+<div id="section-9" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Salvando um resultado, declarando uma variável</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">x &lt;-<span class="st"> </span><span class="dv">32</span> <span class="op">+</span><span class="st"> </span><span class="dv">16</span><span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">25</span><span class="op">^</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb5-2" title="2">x</a></code></pre></div>
+<ul>
+<li>Para saber quais objetos foram criados: ls()</li>
+<li>Para remover um objeto: rm()</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">sample</span>(<span class="dv">10</span>, <span class="dv">4</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## [1]  2  7  5 10</code></pre>
+<ul>
+<li><p>Para pesquisa: ?runif ou help(runif)</p></li>
+<li><p>Criando função:</p></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">a &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb8-2" title="2">  x<span class="op">+</span><span class="dv">3</span><span class="op">*</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb8-3" title="3">}</a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="kw">a</span>(<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">ola.mundo &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="kw">writeLines</span>(<span class="st">&quot;Olá mundo&quot;</span>)</a>
+<a class="sourceLine" id="cb9-3" title="3">}</a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="kw">ola.mundo</span>()</a></code></pre></div>
+<pre><code>## Olá mundo</code></pre>
+</div>
+<div id="section-10" class="slide section level2">
+<h1></h1>
+<p><font size="18">OBJETOS</font></p>
+<ul>
+<li>A variável x recebe o valor 2 (tornando-se um objeto dentro do R):</li>
+</ul>
+<p><span style="color:red">O símbolo &lt;- é chamado de operador de atribuição. Ele serve para atribuir valores a objetos, e é formado pelos símbolos &lt; e -, obrigatoriamente sem espaços.</span></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">X &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb11-2" title="2">x &lt;-<span class="st"> </span><span class="dv">2</span>; y &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb11-3" title="3">x<span class="op">+</span>x</a>
+<a class="sourceLine" id="cb11-4" title="4">teste &lt;-<span class="st"> &quot;teste&quot;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">teste1 &lt;-<span class="st"> </span>teste</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># O R é case-sensitive</span></a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Divida x por 345 e armazene em y.</li>
+</ol>
+</div>
+<div id="section-11" class="slide section level2">
+<h1></h1>
+<p><font size="18">VETOR</font></p>
+<p>Usando a função c() para criar vetores:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">vetor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">class</span>(vetor)</a>
+<a class="sourceLine" id="cb13-3" title="3">vetor1 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(vetor)</a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="kw">levels</span>(vetor1)</a></code></pre></div>
+<p>O R possui 5 classes básicas de objetos, também chamados de objetos “atômicos”:</p>
+<ul>
+<li>character<br />
+</li>
+<li>numeric<br />
+</li>
+<li>integer<br />
+</li>
+<li>complex<br />
+</li>
+<li>logical</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb14-1" title="1">Um vetor só pode conter elementos de uma mesma classe</a></code></pre></div>
+</div>
+<div id="section-12" class="slide section level2">
+<h1></h1>
+<p>Os operadores lógicos utilizados no R são:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Símbolo</th>
+<th>significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt;</td>
+<td>menor</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>menor igual</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>maior</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>maior igual</td>
+</tr>
+<tr class="odd">
+<td>==</td>
+<td>igual</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>diferente</td>
+</tr>
+<tr class="odd">
+<td>&amp;</td>
+<td>e</td>
+</tr>
+<tr class="even">
+<td>|</td>
+<td>ou</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-13" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Criando sequências</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb15-4" title="4">a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">10</span>, <span class="dt">length.out =</span> <span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw">print</span>(a, <span class="dt">digits=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="dt">each =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb15-9" title="9">num &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb15-10" title="10">num</a>
+<a class="sourceLine" id="cb15-11" title="11">num <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb15-12" title="12">num <span class="op">*</span><span class="st"> </span>num</a>
+<a class="sourceLine" id="cb15-13" title="13">num <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</a></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Crie um objeto com os valores 54, 0, 17, 94, 12.5, 2, 0.9, 15. Some o objeto acima com os valores 5, 6.</li>
+</ol>
+</div>
+<div id="section-14" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Valores perdidos e especiais</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">perd &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb16-2" title="2">perd</a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">class</span>(perd)</a>
+<a class="sourceLine" id="cb16-4" title="4">perd1 &lt;-<span class="st"> </span><span class="kw">as.integer</span>(perd)</a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="kw">class</span>(perd1)</a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="kw">any</span>(<span class="kw">is.na</span>(perd))</a></code></pre></div>
+<ul>
+<li>Calcule as 20 primeiras potências de 2</li>
+</ul>
+</div>
+<div id="section-15" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Matrizes, listas e data frames</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">matriz &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb17-2" title="2">matriz</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">rownames</span>(matriz) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">cbind</span>(matriz, <span class="kw">rep</span>(<span class="dv">99</span>, <span class="dv">3</span>))</a></code></pre></div>
+<pre><code>##   [,1] [,2] [,3] [,4] [,5]
+## A    1    4    7   10   99
+## B    2    5    8   11   99
+## C    3    6    9   12   99</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">dim</span>(matriz) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">lista &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="kw">c</span>(<span class="st">&quot;T1&quot;</span>, <span class="st">&quot;T2&quot;</span>, <span class="st">&quot;T3&quot;</span>, <span class="st">&quot;T4&quot;</span>), <span class="ot">TRUE</span>, <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">length</span>(lista)</a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="section-16" class="slide section level2">
+<h1></h1>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">da &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ano =</span> <span class="dv">2000</span><span class="op">:</span><span class="dv">2004</span>,</a>
+<a class="sourceLine" id="cb24-2" title="2">                 <span class="dt">prod =</span> <span class="kw">c</span>(<span class="dv">32</span>, <span class="dv">54</span>, <span class="dv">25</span>, <span class="dv">48</span>, <span class="dv">29</span>))</a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="kw">class</span>(da)</a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="kw">dim</span>(da)</a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="kw">str</span>(da)</a>
+<a class="sourceLine" id="cb24-6" title="6"><span class="kw">row.names</span>(da)</a>
+<a class="sourceLine" id="cb24-7" title="7"><span class="kw">colnames</span>(da)</a></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Crie um data frame com os nomes e idades de cada um do curso.</li>
+</ol>
+</div>
+<div id="section-17" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Gostando até aqui?</li>
+</ul>
+</div>
+<div id="section-18" class="slide section level2">
+<h1></h1>
+<p><em>INDEXAÇÃO E SELEÇÃO CONDICIONAL</em></p>
+<p><strong>Existem três tipos de operadores que podem ser usados para indexar (e selecionar) sub-conjuntos (subsets) de objetos no R</strong></p>
+<ul>
+<li>O operador “[<a href="#section-27"></a>]” sempre retorna um objeto da mesma classe que o original. Pode ser usado para selecionar múltiplos elementos de um objeto</li>
+<li>O operador “[[<a href="#section-27"></a>]]” é usado para extrair elementos de uma lista ou data frame. Pode ser usado para extrair um único elemento e a classe do objeto retornado não precisa necessariamente ser uma lista ou data frame.</li>
+<li>O operador $ é usado para extrair elementos nomeados de uma lista ou data frame. É similar ao operador [[<a href="#section-27"></a> ]].</li>
+</ul>
+</div>
+<div id="section-19" class="slide section level2">
+<h1></h1>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">vet &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">33</span>,<span class="ot">NA</span>,<span class="dv">5</span>, <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb25-2" title="2">vet[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb25-3" title="3">vet[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>)]</a>
+<a class="sourceLine" id="cb25-4" title="4">ind &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb25-5" title="5">vet[ind]</a>
+<a class="sourceLine" id="cb25-6" title="6">vet[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>)]</a>
+<a class="sourceLine" id="cb25-7" title="7">vet[<span class="kw">is.na</span>(vet)]</a>
+<a class="sourceLine" id="cb25-8" title="8">vet[<span class="op">!</span><span class="kw">is.na</span>(vet)]</a>
+<a class="sourceLine" id="cb25-9" title="9">vet[<span class="kw">is.na</span>(vet)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb25-10" title="10"><span class="kw">is.na</span>(vet) &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb25-11" title="11"><span class="kw">names</span>(vet) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vet)]</a>
+<a class="sourceLine" id="cb25-12" title="12">vet[<span class="st">&quot;d&quot;</span>]</a>
+<a class="sourceLine" id="cb25-13" title="13">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb25-14" title="14">mat[<span class="dv">2</span>, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb25-15" title="15">mat[,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb25-16" title="16">mat[<span class="dv">1</span>, , drop =<span class="st"> </span><span class="ot">FALSE</span>]</a></code></pre></div>
+</div>
+<div id="section-20" class="slide section level2">
+<h1></h1>
+<p><em>Indexação de Data-frames</em></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">da &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">B =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb26-2" title="2">da</a>
+<a class="sourceLine" id="cb26-3" title="3">da[<span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb26-4" title="4">da<span class="op">$</span>A</a>
+<a class="sourceLine" id="cb26-5" title="5">da<span class="op">$</span>B[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb26-6" title="6">da[<span class="op">!</span><span class="kw">is.na</span>(da<span class="op">$</span>B), ]</a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="kw">complete.cases</span>(da)</a>
+<a class="sourceLine" id="cb26-8" title="8">da[<span class="kw">complete.cases</span>(da), ]</a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="kw">with</span>(da,A)</a>
+<a class="sourceLine" id="cb26-10" title="10"><span class="kw">with</span>(da,B[<span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb26-11" title="11"></a>
+<a class="sourceLine" id="cb26-12" title="12"><span class="co">#Seleção condicional</span></a>
+<a class="sourceLine" id="cb26-13" title="13"></a>
+<a class="sourceLine" id="cb26-14" title="14">dados &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">42</span>, <span class="dv">28</span>, <span class="dv">79</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">14</span>)</a>
+<a class="sourceLine" id="cb26-15" title="15">dados[dados<span class="op">&gt;</span><span class="dv">15</span>]</a>
+<a class="sourceLine" id="cb26-16" title="16">dados[dados<span class="op">&gt;</span><span class="dv">15</span> <span class="op">&amp;</span><span class="st"> </span>dados<span class="op">&lt;=</span><span class="dv">42</span>]</a>
+<a class="sourceLine" id="cb26-17" title="17">cara &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dados)]</a>
+<a class="sourceLine" id="cb26-18" title="18">dados[cara<span class="op">==</span><span class="st">&quot;c&quot;</span>]</a>
+<a class="sourceLine" id="cb26-19" title="19">dados[cara<span class="op">%in%</span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;c&quot;</span>)]</a>
+<a class="sourceLine" id="cb26-20" title="20">cara[dados<span class="op">==</span><span class="dv">15</span>]</a>
+<a class="sourceLine" id="cb26-21" title="21"><span class="co">## Elemento de cara onde dados for igual a 4 ou 14</span></a>
+<a class="sourceLine" id="cb26-22" title="22">cara[dados <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">14</span>)]</a>
+<a class="sourceLine" id="cb26-23" title="23"><span class="kw">which</span>(dados<span class="op">&gt;</span><span class="dv">15</span>)</a></code></pre></div>
+</div>
+<div id="section-21" class="slide section level2">
+<h1></h1>
+<p><em>Seleção condicional em data-frames</em></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">dados &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ano =</span> <span class="kw">c</span>(<span class="dv">2001</span><span class="op">:</span><span class="dv">2005</span>),</a>
+<a class="sourceLine" id="cb27-2" title="2">                    <span class="dt">captura =</span> <span class="kw">c</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">13</span>,<span class="ot">NA</span>), </a>
+<a class="sourceLine" id="cb27-3" title="3">                    <span class="dt">porto =</span> <span class="kw">c</span>(<span class="st">&quot;SP&quot;</span>, <span class="st">&quot;RS&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RN&quot;</span>))</a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5">dados[dados<span class="op">$</span>ano<span class="op">==</span><span class="dv">2004</span>, ]</a>
+<a class="sourceLine" id="cb27-6" title="6">dados[dados<span class="op">$</span>porto<span class="op">==</span><span class="st">&quot;SC&quot;</span>, ]</a>
+<a class="sourceLine" id="cb27-7" title="7">dados[dados<span class="op">$</span>captura<span class="op">&gt;</span><span class="dv">13</span>, <span class="st">&quot;captura&quot;</span>]</a>
+<a class="sourceLine" id="cb27-8" title="8">dados[dados<span class="op">$</span>captura<span class="op">&gt;</span><span class="dv">12</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(dados<span class="op">$</span>captura), ]</a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="kw">subset</span>(dados, porto<span class="op">==</span><span class="st">&quot;SC&quot;</span>)</a>
+<a class="sourceLine" id="cb27-10" title="10"><span class="kw">subset</span>(dados, captura <span class="op">&gt;</span><span class="st"> </span><span class="dv">11</span>, <span class="dt">select =</span> captura)</a></code></pre></div>
+</div>
+<div id="section-22" class="slide section level2">
+<h1></h1>
+<p><em>Entrada e saída de dados no R</em></p>
+<ul>
+<li>via teclado: função scan()</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co">##y &lt;- scan()</span></a>
+<a class="sourceLine" id="cb28-2" title="2">x &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="dt">what =</span> <span class="st">&quot;character&quot;</span>)</a>
+<a class="sourceLine" id="cb28-3" title="3"></a>
+<a class="sourceLine" id="cb28-4" title="4">texto &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">n=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb28-5" title="5">fn &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb28-6" title="6">    <span class="kw">cat</span>(<span class="st">&quot;Digite o nome do time de futebol de sua preferência (em letras minúsculas)</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb28-7" title="7">    time &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">n =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb28-8" title="8">    <span class="cf">if</span> (time <span class="op">==</span><span class="st"> &quot;coritiba&quot;</span>)</a>
+<a class="sourceLine" id="cb28-9" title="9">        <span class="kw">cat</span>(<span class="st">&quot;BOA ESCOLHA!!!</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb28-10" title="10">    <span class="cf">else</span> <span class="kw">cat</span>(<span class="st">&quot;Ihh, tá mal de escolha...</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb28-11" title="11">    <span class="kw">return</span>(<span class="kw">invisible</span>())</a>
+<a class="sourceLine" id="cb28-12" title="12">}</a>
+<a class="sourceLine" id="cb28-13" title="13"></a>
+<a class="sourceLine" id="cb28-14" title="14"><span class="co">##fn()</span></a></code></pre></div>
+</div>
+<div id="section-23" class="slide section level2">
+<h1></h1>
+<p><em>A função read.table()</em></p>
+<ul>
+<li>O método mais comum de importação de dados para o R.</li>
+<li>Para importar um arquivo .csv faça:</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">dados &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;C:/Users/Maria/Documents/Maria/cnh/curso/idade.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw">getwd</span>()</a></code></pre></div>
+<p>Argumentos:</p>
+<ul>
+<li>“base19.csv”: nome do arquivo. (Considerando que o arquivo base19.csv está dentro do diretório Curso R).</li>
+<li>header = TRUE: significa que a primeira linha do arquivo deve ser interpretada como os nomes das colunas</li>
+<li>sep = “;”: o separador de colunas (também pode ser “,”, “<span class="math inline">\(\t\)</span>” para tabulação e " " para espaços)</li>
+<li>dec = “,”: o separador de decimais (também pode ser “.”)</li>
+<li>As funções read.csv() e read.csv2() são chamadas de wrappers (envelopes) que tornam o usa da função read.table() um pouco mais direta, alterando alguns argumentos. Por exemplo, o comando acima poderia ser substituído por:</li>
+</ul>
+</div>
+<div id="section-24" class="slide section level2">
+<h1></h1>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">dados1 &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;C:/Users/Maria/Documents/Maria/cnh/curso/bancao19.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="kw">str</span>(dados1)</a></code></pre></div>
+<ul>
+<li>Para conferir a estrutura de dados: str()</li>
+<li>início e final: head() e tail()</li>
+<li>para selecionar uma coluna: $</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">dados<span class="op">$</span>tempo</a>
+<a class="sourceLine" id="cb31-2" title="2">dados<span class="op">$</span>idade</a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="kw">summary</span>(dados)</a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="kw">str</span>(dados)</a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="kw">class</span>(dados<span class="op">$</span>tempo)</a></code></pre></div>
+<ul>
+<li>Na base de dados: base19, ache o funcionário Diogo Ayres</li>
+</ul>
+</div>
+<div id="section-25" class="slide section level2">
+<h1></h1>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">url &lt;-<span class="st"> &quot;http://www.leg.ufpr.br/~fernandomayer/data/milsa.csv&quot;</span></a>
+<a class="sourceLine" id="cb32-2" title="2">milsa &lt;-<span class="st"> </span><span class="kw">read.csv</span>(url)</a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">str</span>(milsa)</a></code></pre></div>
+<ul>
+<li>Variável Qualitativa Nominal</li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">str</span>(dados1)</a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="kw">names</span>(dados1)</a>
+<a class="sourceLine" id="cb33-3" title="3">civil.tb &lt;-<span class="st"> </span><span class="kw">table</span>(dados1<span class="op">$</span>Sexo)</a>
+<a class="sourceLine" id="cb33-4" title="4">civil.tb<span class="op">/</span><span class="kw">length</span>(dados1<span class="op">$</span>Sexo)</a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="kw">barplot</span>(civil.tb)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-26-1.png" width="768" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">pie</span>(civil.tb)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-26-2.png" width="768" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co">##frequência relativa</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">prop.table</span>(civil.tb)</a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="kw">plot</span>(dados1<span class="op">$</span>Raça.Cor)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-26-3.png" width="768" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">names</span>(civil.tb)[<span class="kw">which.max</span>(civil.tb)]</a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="kw">median</span>(<span class="kw">as.numeric</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="kw">mean</span>(<span class="kw">as.numeric</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb36-4" title="4">dados1<span class="op">$</span>Salario &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(dados1<span class="op">$</span>Salario)</a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="kw">var</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="kw">sd</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-7" title="7"><span class="kw">quantile</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="kw">max</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-9" title="9"><span class="kw">min</span>(dados1<span class="op">$</span>Salario, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+<div id="section-26" class="slide section level2">
+<h1></h1>
+<ul>
+<li>Variável quantitativa contínua</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">dados1<span class="op">$</span>Salario &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(dados1<span class="op">$</span>Salario)</a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="kw">hist</span>(dados1<span class="op">$</span>Salario, <span class="dt">freq =</span> <span class="ot">TRUE</span>, <span class="dt">labels =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-27-1.png" width="768" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">boxplot</span>(dados1<span class="op">$</span>Salario)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-27-2.png" width="768" /></p>
+</div>
+<div id="análise-bivariada-e-correlaçao" class="slide section level2">
+<h1>Análise Bivariada e Correlaçao</h1>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">raca &lt;-<span class="st"> </span><span class="kw">with</span>(dados1, <span class="kw">table</span>(Sexo, Raça.Cor))</a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">addmargins</span>(raca)</a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="kw">barplot</span>(raca, <span class="dt">legend=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-28-1.png" width="768" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="kw">ggplot</span>(dados1) <span class="op">+</span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span> dados1<span class="op">$</span>Sexo, dados1<span class="op">$</span>Salario, <span class="dt">colour =</span> <span class="kw">as.factor</span>(Sexo)))</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-28-2.png" width="768" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">boxplot</span>(Salario<span class="op">~</span>Sexo, <span class="dt">data=</span> dados1)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-28-3.png" width="768" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">levels</span>(dados1<span class="op">$</span>Sexo)</a>
+<a class="sourceLine" id="cb42-2" title="2">dados1<span class="op">$</span>Salario &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(dados1<span class="op">$</span>Salario)</a>
+<a class="sourceLine" id="cb42-3" title="3">dados1<span class="op">$</span>Sexo&lt;-<span class="kw">ifelse</span>(dados1<span class="op">$</span>Sexo<span class="op">==</span><span class="st">&quot;M&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="kw">with</span>(dados1, <span class="kw">cor</span>(Salario, Sexo))</a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="kw">cor.test</span>(dados1<span class="op">$</span>Salario, dados1<span class="op">$</span>Sexo)</a>
+<a class="sourceLine" id="cb42-6" title="6"><span class="kw">names</span>(dados1)</a>
+<a class="sourceLine" id="cb42-7" title="7"><span class="kw">library</span>(psych)</a>
+<a class="sourceLine" id="cb42-8" title="8"><span class="kw">pairs.panels</span>(dados1[ , <span class="dv">9</span><span class="op">:</span><span class="dv">13</span>], </a>
+<a class="sourceLine" id="cb42-9" title="9">             <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>,</a>
+<a class="sourceLine" id="cb42-10" title="10">             <span class="dt">hist.col =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb42-11" title="11">             <span class="dt">density =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb42-12" title="12">             <span class="dt">ellipses =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb42-13" title="13">             <span class="dt">pch =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb42-14" title="14">             <span class="dt">lwd =</span> <span class="fl">0.01</span></a>
+<a class="sourceLine" id="cb42-15" title="15"></a>
+<a class="sourceLine" id="cb42-16" title="16">)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-28-4.png" width="768" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(dados1<span class="op">$</span>Sexo, dados1<span class="op">$</span>Estado.Civil)</a>
+<a class="sourceLine" id="cb43-2" title="2">data &lt;-<span class="st"> </span><span class="kw">table</span>(dados1<span class="op">$</span>Sexo, dados1<span class="op">$</span>Estado.Civil)</a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="kw">print</span>(<span class="kw">chisq.test</span>(data))</a></code></pre></div>
+</div>
+<div id="section-27" class="slide section level2">
+<h1></h1>
+<p>Estruturas de repetição</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">6</span>)){</a>
+<a class="sourceLine" id="cb44-2" title="2">    <span class="kw">print</span>(i<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb44-3" title="3">}</a>
+<a class="sourceLine" id="cb44-4" title="4"></a>
+<a class="sourceLine" id="cb44-5" title="5">x &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">:</span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb44-6" title="6"><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb44-7" title="7">    <span class="cf">if</span>(x[j] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">105</span>){</a>
+<a class="sourceLine" id="cb44-8" title="8">        <span class="kw">print</span>(<span class="st">&quot;Menor ou igual a 105&quot;</span>)</a>
+<a class="sourceLine" id="cb44-9" title="9">    } <span class="cf">else</span>{</a>
+<a class="sourceLine" id="cb44-10" title="10">        <span class="kw">print</span>(<span class="st">&quot;Maior do que 105&quot;</span>)</a>
+<a class="sourceLine" id="cb44-11" title="11">    }</a>
+<a class="sourceLine" id="cb44-12" title="12">}</a>
+<a class="sourceLine" id="cb44-13" title="13"></a>
+<a class="sourceLine" id="cb44-14" title="14">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span></a>
+<a class="sourceLine" id="cb44-15" title="15">y1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb44-16" title="16"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)){</a>
+<a class="sourceLine" id="cb44-17" title="17">    y1[i] &lt;-<span class="st"> </span>x[i]<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb44-18" title="18">}</a>
+<a class="sourceLine" id="cb44-19" title="19"></a>
+<a class="sourceLine" id="cb44-20" title="20">y2 &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb44-21" title="21"><span class="co">## Confere os resultados</span></a>
+<a class="sourceLine" id="cb44-22" title="22"><span class="kw">identical</span>(y1, y2)</a></code></pre></div>
+</div>
+<div id="família-apply" class="slide section level2">
+<h1>Família Apply</h1>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">names</span>(dados1)</a>
+<a class="sourceLine" id="cb45-2" title="2">dados1[,<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">20</span>)]</a>
+<a class="sourceLine" id="cb45-3" title="3"></a>
+<a class="sourceLine" id="cb45-4" title="4">dados2 &lt;-<span class="st"> </span><span class="kw">subset</span>(dados1, <span class="dt">select=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">19</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb45-5" title="5">dados2<span class="op">$</span>Salario &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(dados2<span class="op">$</span>Salario)</a>
+<a class="sourceLine" id="cb45-6" title="6"></a>
+<a class="sourceLine" id="cb45-7" title="7"><span class="kw">apply</span>(dados2[, <span class="dv">10</span><span class="op">:</span><span class="dv">11</span>], <span class="dv">2</span>, mean)</a></code></pre></div>
+<pre><code>## Warning in mean.default(newX[, i], ...): argument is not numeric or logical: returning NA
+
+## Warning in mean.default(newX[, i], ...): argument is not numeric or logical: returning NA</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">with</span>(dados1, (<span class="kw">tapply</span>(Sexo, Raça.Cor, table)))</a>
+<a class="sourceLine" id="cb47-2" title="2"></a>
+<a class="sourceLine" id="cb47-3" title="3">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">beta =</span> <span class="kw">exp</span>(<span class="op">-</span><span class="dv">3</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">logic =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">FALSE</span>,<span class="ot">FALSE</span>,<span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb47-4" title="4">x</a>
+<a class="sourceLine" id="cb47-5" title="5"><span class="kw">lapply</span>(x, mean)</a>
+<a class="sourceLine" id="cb47-6" title="6"><span class="kw">sapply</span>(x, mean)</a></code></pre></div>
+</div>
+<div id="predições" class="slide section level2">
+<h1>Predições</h1>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">cars</a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="kw">summary</span>(cars)</a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="co">## Ajuste do modelo</span></a>
+<a class="sourceLine" id="cb48-4" title="4">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="kw">summary</span>(mod)</a>
+<a class="sourceLine" id="cb48-6" title="6">pred &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">speed =</span> <span class="kw">seq</span>(<span class="dv">4</span>, <span class="dv">25</span>, <span class="dt">by =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb48-7" title="7">ypred &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> pred, <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</a>
+<a class="sourceLine" id="cb48-8" title="8">pred &lt;-<span class="st"> </span><span class="kw">cbind</span>(pred, ypred)</a>
+<a class="sourceLine" id="cb48-9" title="9">pred</a>
+<a class="sourceLine" id="cb48-10" title="10"><span class="kw">plot</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars,</a>
+<a class="sourceLine" id="cb48-11" title="11">     <span class="dt">xlab =</span> <span class="st">&quot;Velocidade ao acionar os freios&quot;</span>,</a>
+<a class="sourceLine" id="cb48-12" title="12">     <span class="dt">ylab =</span> <span class="st">&quot;Distância para parada completa&quot;</span>)</a>
+<a class="sourceLine" id="cb48-13" title="13"><span class="kw">with</span>(pred,</a>
+<a class="sourceLine" id="cb48-14" title="14">     <span class="kw">matlines</span>(<span class="dt">x =</span> speed, <span class="dt">y =</span> <span class="kw">cbind</span>(fit, lwr, upr),</a>
+<a class="sourceLine" id="cb48-15" title="15">              <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-31-1.png" width="768" /></p>
+</div>
+<div id="séries-temporais" class="slide section level2">
+<h1>Séries Temporais</h1>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">library</span>(tseries)</a>
+<a class="sourceLine" id="cb49-2" title="2">leavers &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;leavers.csv&quot;</span>, <span class="dt">h=</span>T)</a>
+<a class="sourceLine" id="cb49-3" title="3">leavers1 &lt;-<span class="st"> </span><span class="kw">na.omit</span>(leavers<span class="op">$</span>Age)</a>
+<a class="sourceLine" id="cb49-4" title="4">tempotimeseries &lt;-<span class="st"> </span><span class="kw">ts</span>(leavers1, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">2015</span>,<span class="dv">1</span>), <span class="dt">end=</span><span class="kw">c</span>(<span class="dv">2019</span>,<span class="dv">10</span>), <span class="dt">frequency=</span><span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="kw">plot.ts</span>(tempotimeseries)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-32-1.png" width="768" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">timeseriescomponents &lt;-<span class="st"> </span><span class="kw">decompose</span>(tempotimeseries)</a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="kw">plot</span>(timeseriescomponents)</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-32-2.png" width="768" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">library</span>(forecast)</a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">forecast</span>(tempotimeseries)</a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="kw">plot</span>(<span class="kw">forecast</span>(tempotimeseries))</a></code></pre></div>
+<p><img src="CursoR_files/figure-slidy/unnamed-chunk-32-3.png" width="768" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">arima.model &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(<span class="kw">ts</span>(tempotimeseries, <span class="dt">frequency=</span><span class="dv">30</span>), <span class="dt">D=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="kw">summary</span>(arima.model)</a>
+<a class="sourceLine" id="cb52-3" title="3">forearima &lt;-<span class="st"> </span>forecast<span class="op">::</span><span class="kw">forecast</span>(arima.model, <span class="dt">h=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb52-4" title="4">forearima</a></code></pre></div>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>
